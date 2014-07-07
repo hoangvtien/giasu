@@ -14,24 +14,26 @@ $page_title = $module_info['custom_title'];
 $key_words = $module_info['keywords'];
 
 if(isset($_FILES['avartar']))
-			{
-				// Upload File
-				require_once NV_ROOTDIR . '/includes/class/upload.class.php';
-				
-				$allow_files_type = array('images');//Các loại file được xác định tại file: includes\ini\mime.ini
-				
-				$_upload = new upload($allow_files_type, $global_config['forbid_extensions'], $global_config['forbid_mimes'], NV_UPLOAD_MAX_FILESIZE);
-				
-				nv_mkdir(NV_ROOTDIR . '/uploads/', 'avarta');// Tạo 1  thư mục
-				
-				$upload_info = $_upload -> save_file($_FILES['uploadfile'], NV_ROOTDIR . '/uploads/avarta', false);
-				if (!empty($upload_info['error'])) {
-				    $error = $upload_info['error'];
-				} else {
-				    $filename = $upload_info['name'];
-				}
-								
-			}
+{
+	// Upload File
+	require_once NV_ROOTDIR . '/includes/class/upload.class.php';
+	
+	$allow_files_type = array('images');//Các loại file được xác định tại file: includes\ini\mime.ini
+	
+	$_upload = new upload($allow_files_type, $global_config['forbid_extensions'], $global_config['forbid_mimes'], NV_UPLOAD_MAX_FILESIZE);
+	
+	nv_mkdir(NV_ROOTDIR . '/uploads/', 'avarta');// Tạo 1  thư mục
+	
+	$upload_info = $_upload -> save_file($_FILES['uploadfile'], NV_ROOTDIR . '/uploads/avarta', false);
+	if (!empty($upload_info['error']))
+	{
+	    $error = $upload_info['error'];
+	}
+	else {
+	    $filename = $upload_info['name'];
+	}
+					
+}
 			
 
 $contents = nv_theme_giasu_addregister( $array_data );
