@@ -47,7 +47,7 @@ if ( $nv_Request->isset_request( 'delete_id', 'get' ) and $nv_Request->isset_req
 		$sql = 'SELECT weight FROM ' . NV_PREFIXLANG . '_' . $module_data . '_dangky WHERE id =' . $db->quote( $id );
 		$result = $db->query( $sql );
 		list( $weight) = $result->fetch( 3 );
-		
+
 		$db->query('DELETE FROM ' . NV_PREFIXLANG . '_' . $module_data . '_dangky  WHERE id = ' . $db->quote( $id ) );
 		if( $weight > 0)
 		{
@@ -79,7 +79,7 @@ if ( $nv_Request->isset_request( 'submit', 'post' ) )
 	$row['numsession'] = $nv_Request->get_int( 'numsession', 'post', 0 );
 	$row['phonenumber'] = $nv_Request->get_title( 'phonenumber', 'post', '' );
 	$row['avartar'] = $nv_Request->get_title( 'avartar', 'post', '' );
-	$row[' requirements'] = $nv_Request->get_string( ' requirements', 'post', '' );
+	$row['requirements'] = $nv_Request->get_string( 'requirements', 'post', '' );
 
 	if( empty( $row['namegs'] ) )
 	{
@@ -112,17 +112,15 @@ if ( $nv_Request->isset_request( 'submit', 'post' ) )
 		{
 			if( empty( $row['id'] ) )
 			{
-				$stmt = $db->prepare( 'INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_dangky (namegs, datebirth, workplace, email, subregister, begindate, enddate, numsession, phonenumber, weight, avartar,  requirements) VALUES (:namegs, :datebirth, :workplace, :email, :subregister, :begindate, :enddate, :numsession, :phonenumber, :weight, :avartar, : requirements)' );
+				$stmt = $db->prepare( 'INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_dangky (namegs, datebirth, workplace, email, subregister, begindate, enddate, numsession, phonenumber, weight, avartar,  requirements) VALUES (:namegs, :datebirth, :workplace, :email, :subregister, :begindate, :enddate, :numsession, :phonenumber, :weight, :avartar, :requirements)' );
 
 				$weight = $db->query( 'SELECT max(weight) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_dangky' )->fetchColumn();
 				$weight = intval( $weight ) + 1;
 				$stmt->bindParam( ':weight', $weight, PDO::PARAM_INT );
-
-
 			}
 			else
 			{
-				$stmt = $db->prepare( 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_dangky SET namegs = :namegs, datebirth = :datebirth, workplace = :workplace, email = :email, subregister = :subregister, begindate = :begindate, enddate = :enddate, numsession = :numsession, phonenumber = :phonenumber, avartar = :avartar,  requirements = : requirements WHERE id=' . $row['id'] );
+				$stmt = $db->prepare( 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_dangky SET namegs = :namegs, datebirth = :datebirth, workplace = :workplace, email = :email, subregister = :subregister, begindate = :begindate, enddate = :enddate, numsession = :numsession, phonenumber = :phonenumber, avartar = :avartar,  requirements = :requirements WHERE id=' . $row['id'] );
 			}
 			$stmt->bindParam( ':namegs', $row['namegs'], PDO::PARAM_STR );
 			$stmt->bindParam( ':datebirth', $row['datebirth'], PDO::PARAM_STR );
@@ -134,7 +132,7 @@ if ( $nv_Request->isset_request( 'submit', 'post' ) )
 			$stmt->bindParam( ':numsession', $row['numsession'], PDO::PARAM_INT );
 			$stmt->bindParam( ':phonenumber', $row['phonenumber'], PDO::PARAM_STR );
 			$stmt->bindParam( ':avartar', $row['avartar'], PDO::PARAM_STR );
-			$stmt->bindParam( ': requirements', $row[' requirements'], PDO::PARAM_STR, strlen($row[' requirements']) );
+			$stmt->bindParam( ':requirements', $row['requirements'], PDO::PARAM_STR, strlen($row['requirements']) );
 
 			$exc = $stmt->execute();
 			if( $exc )

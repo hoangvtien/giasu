@@ -21,3 +21,8 @@ $lang_module['detail'] = 'Xem chi tiết';
 $lang_module['search'] = 'Tìm kiếm';
 $lang_module['adddangky'] = 'Đăng ký';
 $lang_module['tutoring'] = 'Đăng ký gia sư';
+
+$lang_module['error_required_namegs'] = 'Lỗi: bạn cần nhập dữ liệu cho Tên người đăng ký';
+$lang_module['error_required_workplace'] = 'Lỗi: bạn cần nhập dữ liệu cho Nơi công tác hiện nay';
+$lang_module['error_required_subregister'] = 'Lỗi: bạn cần nhập dữ liệu cho Môn đăng ký dạy';
+
