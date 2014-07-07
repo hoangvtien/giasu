@@ -12,7 +12,7 @@ if ( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
 
 $sql_drop_module = array();
 $sql_drop_module[] = "DROP TABLE IF EXISTS `" . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_giasu`";
-
+$sql_drop_module[] = "DROP TABLE IF EXISTS `" . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_dangky`";
 
 $sql_create_module = $sql_drop_module;
 $sql_create_module[] = "CREATE TABLE `" . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_giasu` (
@@ -32,12 +32,13 @@ $sql_create_module[] = "CREATE TABLE `" . $db_config['prefix'] . "_" . $lang . "
   `avartar` varchar(255) NOT NULL COMMENT 'Hình ảnh',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;";
-$sql_create_module[] = "CREATE TABLE `" . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_dangky`` (
+$sql_create_module[] = "CREATE TABLE `" . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_dangky` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `namegs` varchar(50) NOT NULL COMMENT 'Tên người đăng ký',
-  `alias` varchar(255) NOT NULL COMMENT 'Tên người đăng ký',
-  `Datebirth` varchar(10) NOT NULL COMMENT 'Ngày sinh',
+  `alias` varchar(255) NOT NULL,
+  `datebirth` varchar(10) NOT NULL COMMENT 'Ngày sinh',
   `workplace` varchar(255) NOT NULL COMMENT 'Nơi công tác hiện nay',
+  `email` varchar(255) NOT NULL,
   `subregister` varchar(150) NOT NULL COMMENT 'Môn đăng ký dạy',
   `begindate` int(11) NOT NULL COMMENT 'Bắt đầu thời gian dạy',
   `enddate` int(11) NOT NULL COMMENT 'Kết thúc',
